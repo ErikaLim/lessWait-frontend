@@ -13,10 +13,12 @@ function searchAction(searchTerm) {
       "s":query // params[:s]
     }
   };
-  
+
   $.ajax(req)
     .done(function (res) {
       console.log(res);
+      // append to list
+      $("#search-results").append("Hello")
     })
     .fail(function () {
       throw "Search AJAX Failed";
