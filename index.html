@@ -23,6 +23,13 @@
 
     </div>
 
+    <!-- Handlebar Templates -->
+
+    <script id="search-results-template" type="text/x-handlebars-template">
+      {{#each restaurants}}
+        <h3>{{name}}</h3>
+      {{/each}}
+    </script>
 
     <script src="bower_components/jquery/dist/jquery.min.js" charset="utf-8"></script>
     <script src="bower_components/semantic-ui/dist/semantic.min.js" charset="utf-8"></script>

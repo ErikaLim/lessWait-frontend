@@ -1,3 +1,7 @@
+var source   = $("#search-results-template").html();
+var searchResultsTemplate = Handlebars.compile(source);
+
+
 $("#search-form").on("submit", function (e) {
   e.preventDefault();
   searchAction($("#search-form input").val());
@@ -18,9 +22,16 @@ function searchAction(searchTerm) {
     .done(function (res) {
       console.log(res);
       // append to list
-      $("#search-results").append("Hello")
+      setSearchResultsTemplate({restaurants:res});
     })
     .fail(function () {
       throw "Search AJAX Failed";
     });
+}
+
+function setSearchResultsTemplate(context) {
+  // context is a {}
+  console.log("append", context);
+  var html = searchResultsTemplate(context);
+  $("#search-results").append(html);
 }
