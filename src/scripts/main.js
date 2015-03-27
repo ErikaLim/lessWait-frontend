@@ -34,4 +34,5 @@ function setSearchResultsTemplate(context) {
   console.log("append", context);
   var html = searchResultsTemplate(context);
   $("#search-results").append(html);
+  $('.ui.accordion').accordion("close others");
 }

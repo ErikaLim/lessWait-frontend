@@ -1,0 +1,9 @@
+.pull-right {
+  float:right;
+
+}
+
+#search-results{
+  overflow: scroll;
+  height:94vh;
+}

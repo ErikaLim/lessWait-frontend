@@ -4,13 +4,14 @@
     <title>
     </title>
     <link rel="stylesheet" href="bower_components/semantic-ui/dist/semantic.min.css">
+    <link rel="stylesheet" href="src/styles/main.css">
   </head>
   <body>
     <div class="ui grid">
 
-      <div class="six wide column">
+      <div class="four wide column">
         <form id="search-form" action="" method="">
-          <div class="ui action input">
+          <div class="ui action fluid input">
             <input type="text" placeholder="Search...">
             <button class="ui button">Search</button>
           </div>
@@ -19,16 +20,32 @@
         <div id="search-results" class=""></div>
       </div>
 
-      <div class="ten wide column">[placeholder]</div>
+      <div class="twelve wide column">
+
+      </div>
 
     </div>
 
     <!-- Handlebar Templates -->
-
     <script id="search-results-template" type="text/x-handlebars-template">
-      {{#each restaurants}}
-        <h3>{{name}}</h3>
-      {{/each}}
+      <div class="ui styled fluid accordion">
+        {{#each restaurants}}
+        <div class="title">
+          <i class="dropdown icon"></i>
+          <span class="pull-right">[Time]</span>
+          {{name}}
+        </div>
+        <div class="content">
+          <div class="">
+            [Restaurant Details]
+          </div>
+          --------------------
+          <div class="">
+            [Add Wait Time Form]
+          </div>
+        </div>
+        {{/each}}
+      </div>
     </script>
 
     <script src="bower_components/jquery/dist/jquery.min.js" charset="utf-8"></script>
