@@ -1,5 +1,6 @@
 var source   = $("#search-results-template").html();
 var searchResultsTemplate = Handlebars.compile(source);
+var featureLayers = [];
 
 
 
@@ -53,14 +54,18 @@ function searchAction(searchTerm) {
 
 function setSearchResultsTemplate(context) {
   var html = searchResultsTemplate(context);
-  $("#search-results").append(html);
+  $("#search-results").html(html);
   $('.ui.accordion').accordion("close others");
+  featureLayers.forEach(function (featureLayer) {
+    map.removeLayer(featureLayer);
+  });
+  featureLayers = [];
 }
 
 
 
 function addMarker(restaurant) {
-  L.mapbox.featureLayer({
+  var featureLayer = L.mapbox.featureLayer({
     // this feature is in the GeoJSON format: see geojson.org
     // for the full specification
     type: 'Feature',
@@ -73,14 +78,15 @@ function addMarker(restaurant) {
     properties: {
         title: restaurant.name,
         description: "<div>"+ restaurant.address +"</div>" + "<div>"+ restaurant.phone +"</div>"
-
-
         // description: restaurant.address,
         // one can customize markers by adding simplestyle properties
         // https://www.mapbox.com/guides/an-open-platform/#simplestyle
         // 'marker-size': 'large',
         // 'marker-color': '#BE9A6B',
         // 'marker-symbol': 'cafe'
+
     }
-  }).addTo(map);
+  });
+  featureLayer.addTo(map);
+  featureLayers.push(featureLayer);
 }
