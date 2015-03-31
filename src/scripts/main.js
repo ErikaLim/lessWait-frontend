@@ -92,7 +92,7 @@ function reportWaitTimeAction(waitTime,id) {
     restaurant_id:id
   };
 
-  var url = "http://localhost3000/wait_time";
+  var url = "http://localhost:3000/wait_times";
   var req = {
     url: url,
     method: "post",
