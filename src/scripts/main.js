@@ -2,12 +2,8 @@ var source   = $("#search-results-template").html();
 var searchResultsTemplate = Handlebars.compile(source);
 var featureLayers = [];
 
-
-
-// Provide your access token
 L.mapbox.accessToken = 'pk.eyJ1IjoiZXJpa2FsaW0iLCJhIjoiSlNWby0ySSJ9.EIx_Hy7Z4poH6igFQqfCZQ';
-// Create a map in the div #map
-map = L.mapbox.map('map', 'erikalim.liomn8ke').setView([37.767, -122.436], 13);
+map = L.mapbox.map('map', 'erikalim.ljld06gn').setView([37.759, -122.445], 13);
 
 $("#search-results").on("click", ".restaurant", function() {
   var divCoords = $(this).data("coordinates").split(',');
@@ -30,6 +26,13 @@ $("#search-form").on("submit", function (e) {
   searchAction($("#search-form input").val());
 });
 
+$("#search-results").on("submit", "div.content.active form", function (e) {
+  e.preventDefault();
+  var waitTime = $(".content.active .wait-time-form input").val();
+  var id = $(this).data("id");
+  reportWaitTimeAction(waitTime, id);
+});
+
 function searchAction(searchTerm) {
   var query = searchTerm.replace(/\s/g, "+");
   var url = "http://localhost:3000/search_yelp";
@@ -43,7 +46,6 @@ function searchAction(searchTerm) {
 
   $.ajax(req)
     .done(function (res) {
-      console.log(res);
       // append to list
       setSearchResultsTemplate({restaurants:res});
     })
@@ -62,23 +64,16 @@ function setSearchResultsTemplate(context) {
   featureLayers = [];
 }
 
-
-
 function addMarker(restaurant) {
   var featureLayer = L.mapbox.featureLayer({
-    // this feature is in the GeoJSON format: see geojson.org
-    // for the full specification
     type: 'Feature',
     geometry: {
         type: 'Point',
-        // coordinates here are in longitude, latitude order because
-        // x, y is the standard for GeoJSON and many formats
         coordinates: restaurant.coords
     },
     properties: {
         title: restaurant.name,
         description: "<div>"+ restaurant.address +"</div>" + "<div>"+ restaurant.phone +"</div>"
-        // description: restaurant.address,
         // one can customize markers by adding simplestyle properties
         // https://www.mapbox.com/guides/an-open-platform/#simplestyle
         // 'marker-size': 'large',
@@ -89,4 +84,27 @@ function addMarker(restaurant) {
   });
   featureLayer.addTo(map);
   featureLayers.push(featureLayer);
+}
+
+function reportWaitTimeAction(waitTime,id) {
+  var payload = {
+    wait_time:waitTime,
+    restaurant_id:id
+  };
+
+  var url = "http://localhost3000/wait_time";
+  var req = {
+    url: url,
+    method: "post",
+    data:payload
+  };
+
+
+  $.ajax(req)
+    .done(function (res) {
+      console.log(res);
+    })
+    .fail(function () {
+      throw "Search AJAX Failed";
+    });
 }

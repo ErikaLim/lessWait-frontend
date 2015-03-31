@@ -8,13 +8,15 @@
     <link rel="stylesheet" href="https://api.tiles.mapbox.com/mapbox.js/v2.1.6/mapbox.css">
   </head>
   <body>
-    <div class="ui grid">
+    <div class="ui padded grid">
 
       <div class="four wide column">
         <form id="search-form" action="" method="">
           <div class="ui action fluid input">
             <input type="text" placeholder="Search...">
-            <button class="ui button">Search</button>
+            <button class="ui icon button">
+              <i class="search icon"></i>
+            </button>
           </div>
         </form>
 
@@ -22,22 +24,18 @@
       </div>
 
       <div class="twelve wide column">
-
-          <div id="map"></div>
-
+        <div id="map"></div>
       </div>
 
     </div>
 
     <!-- Handlebar Templates -->
     <script id="search-results-template" type="text/x-handlebars-template">
-      <div class="ui styled fluid accordion">
+      <div class="ui inverted fluid accordion">
         {{#each restaurants}}
         <div class="restaurant"
           data-coordinates="{{geocoords}}"
-          data-name="{{name}}"
-          data-address="{{address}}"
-          data-phone="{{phone}}"
+
           >
           <div class="title">
             <i class="dropdown icon"></i>
@@ -65,13 +63,18 @@
                 </div>
                 {{/each}}
               </div>
+              <form class="ui form wait-time-form" data-id="{{id}}" action="" method="">
+                <div class="ui action fluid input">
+                  <input type="text" placeholder="Report wait times in minutes">
+                  <button class="ui button">Submit</button>
+                </div>
+              </form>
             </div>
           </div>
         </div>
         {{/each}}
       </div>
     </script>
-
 
     <script src="bower_components/jquery/dist/jquery.min.js" charset="utf-8"></script>
     <script src="bower_components/semantic-ui/dist/semantic.min.js" charset="utf-8"></script>
