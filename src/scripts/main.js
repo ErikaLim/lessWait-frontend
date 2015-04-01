@@ -1,3 +1,4 @@
+HandlebarsIntl.registerWith(Handlebars);
 var source   = $("#search-results-template").html();
 var searchResultsTemplate = Handlebars.compile(source);
 var featureLayers = [];
@@ -29,8 +30,12 @@ $("#search-form").on("submit", function (e) {
 $("#search-results").on("submit", "div.content.active form", function (e) {
   e.preventDefault();
   var waitTime = $(".content.active .wait-time-form input").val();
+  if (waitTime === "") {
+    return;
+  }
   var id = $(this).data("id");
   reportWaitTimeAction(waitTime, id);
+  removeWaitTimeForm($(this));
 });
 
 function searchAction(searchTerm) {
@@ -48,6 +53,7 @@ function searchAction(searchTerm) {
     .done(function (res) {
       // append to list
       setSearchResultsTemplate({restaurants:res});
+      console.log(res);
     })
     .fail(function () {
       throw "Search AJAX Failed";
@@ -73,13 +79,10 @@ function addMarker(restaurant) {
     },
     properties: {
         title: restaurant.name,
-        description: "<div>"+ restaurant.address +"</div>" + "<div>"+ restaurant.phone +"</div>"
-        // one can customize markers by adding simplestyle properties
-        // https://www.mapbox.com/guides/an-open-platform/#simplestyle
-        // 'marker-size': 'large',
-        // 'marker-color': '#BE9A6B',
-        // 'marker-symbol': 'cafe'
-
+        description: "<div>"+ restaurant.address +"</div>" + "<div>"+ restaurant.phone +"</div>" + "<div>" + restaurant.wait_time + "</div>",
+        'marker-size': 'medium',
+        'marker-color': '#FA6400',
+        'marker-symbol': 'restaurant'
     }
   });
   featureLayer.addTo(map);
@@ -99,12 +102,23 @@ function reportWaitTimeAction(waitTime,id) {
     data:payload
   };
 
-
   $.ajax(req)
     .done(function (res) {
-      console.log(res);
+      setActiveRestaurant(waitTime);
     })
     .fail(function () {
       throw "Search AJAX Failed";
     });
+}
+
+function removeWaitTimeForm($form) {
+  $form.fadeOut("fast", function () {
+    $form.remove();
+  });
+}
+
+function setActiveRestaurant(waitTime) {
+
+  $('.active.title .wait-time-indicator').html(waitTime + '<i class="wait icon"></i>');
+
 }

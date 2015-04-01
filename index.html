@@ -8,14 +8,14 @@
     <link rel="stylesheet" href="https://api.tiles.mapbox.com/mapbox.js/v2.1.6/mapbox.css">
   </head>
   <body>
-    <div class="ui padded grid">
+    <div class="ui stackable padded grid">
 
       <div class="four wide column">
         <form id="search-form" action="" method="">
           <div class="ui action fluid input">
             <input type="text" placeholder="Search...">
-            <button class="ui icon button">
-              <i class="search icon"></i>
+            <button class="ui icon button primary">
+              <i class="food icon"></i>
             </button>
           </div>
         </form>
@@ -31,8 +31,9 @@
 
     <!-- Handlebar Templates -->
     <script id="search-results-template" type="text/x-handlebars-template">
-      <div class="ui inverted fluid accordion">
+      <div class="ui inverted  fluid accordion">
         {{#each restaurants}}
+        <div class="ui divider"></div>
         <div class="restaurant"
           data-coordinates="{{geocoords}}"
           data-name="{{name}}"
@@ -40,12 +41,27 @@
           data-phone="{{phone}}"
           >
           <div class="title">
-            <i class="dropdown icon"></i>
-            <span class="pull-right">[Time]</span>
-            {{name}}
+            <h5>
+              <i class="dropdown icon"></i>
+              <span class="wait-time-indicator pull-right">
+                {{#if wait_time}}
+                  {{wait_time.time}}
+                  <i class="wait icon"></i>
+                {{else}}
+                  no estimate
+                {{/if}}
+              </span>
+              {{name}}
+            </h5>
           </div>
           <div class="content">
             <div class="ui list">
+              <div class="item">
+                {{#if wait_time}}
+                  {{wait_time.time}} minutes
+                  reported: {{formatRelative wait_time.created_at}}
+                {{/if}}
+              </div>
               <div class="item">
                 <img src="{{star_rating}}" alt="{{rating}} stars" />
               </div>
@@ -60,15 +76,17 @@
               </div>
               <div class="item">
                 {{#each categories}}
-                <div class="ui teal label">
+                <div class="ui blue label">
                   {{this}}
                 </div>
                 {{/each}}
               </div>
               <form class="ui form wait-time-form" data-id="{{id}}" action="" method="">
                 <div class="ui action fluid input">
-                  <input type="text" placeholder="Report wait times in minutes">
-                  <button class="ui button">Submit</button>
+                  <input type="number " placeholder="Wait times">
+                  <button class="ui small button primary">
+                    Minutes
+                  </button>
                 </div>
               </form>
             </div>
@@ -81,6 +99,7 @@
     <script src="bower_components/jquery/dist/jquery.min.js" charset="utf-8"></script>
     <script src="bower_components/semantic-ui/dist/semantic.min.js" charset="utf-8"></script>
     <script src="bower_components/handlebars/handlebars.min.js"charset="utf-8"></script>
+    <script src="node_modules/handlebars-intl/dist/handlebars-intl.min.js"charset="utf-8"></script>
     <script src='https://api.tiles.mapbox.com/mapbox.js/v2.1.6/mapbox.js'></script>
     <script src="src/scripts/main.js"charset="utf-8"></script>
   </body>
