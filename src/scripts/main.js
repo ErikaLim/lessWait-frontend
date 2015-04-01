@@ -11,16 +11,19 @@ $("#search-results").on("click", ".restaurant", function() {
   var name = $(this).data("name");
   var address = $(this).data("address");
   var phone = $(this).data("phone");
+  var waitTime = $('.active.title .wait-time-indicator').text();
 
   var restaurant = {
     coords: [parseFloat(divCoords[0]), parseFloat(divCoords[1])],
     name: name,
     address: address,
-    phone: phone
+    phone: phone,
+    wait_time: waitTime
   };
 
   addMarker(restaurant);
 });
+
 
 $("#search-form").on("submit", function (e) {
   e.preventDefault();
@@ -79,12 +82,13 @@ function addMarker(restaurant) {
     },
     properties: {
         title: restaurant.name,
-        description: "<div>"+ restaurant.address +"</div>" + "<div>"+ restaurant.phone +"</div>" + "<div>" + restaurant.wait_time + "</div>",
+        description: "<div>"+ restaurant.address +"</div>" + "<div>"+ restaurant.phone +"</div>" + "<div>" + restaurant.wait_time + " minutes </div>",
         'marker-size': 'medium',
         'marker-color': '#FA6400',
         'marker-symbol': 'restaurant'
     }
   });
+  console.log(">>", restaurant);
   featureLayer.addTo(map);
   featureLayers.push(featureLayer);
 }
@@ -118,7 +122,5 @@ function removeWaitTimeForm($form) {
 }
 
 function setActiveRestaurant(waitTime) {
-
   $('.active.title .wait-time-indicator').html(waitTime + '<i class="wait icon"></i>');
-
 }
