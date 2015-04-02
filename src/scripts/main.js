@@ -24,6 +24,12 @@ $("#search-results").on("click", ".restaurant", function() {
   addMarker(restaurant);
 });
 
+$("#search-results").on("click", ".category", function () {
+  var category = $(this).text().trim();
+  $("#search-form input").val(category);
+  searchAction(category);
+});
+
 
 $("#search-form").on("submit", function (e) {
   e.preventDefault();

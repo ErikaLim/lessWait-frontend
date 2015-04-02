@@ -32,20 +32,22 @@ body, html {
 }
 
 .custom-popup .leaflet-popup-content-wrapper {
-  background:#2c3e50;
+  background:#5B6769;
   color:#fff;
   font-size:14px;
   line-height:24px;
+
   }
 .custom-popup .leaflet-popup-content-wrapper a {
-  color:rgba(255,255,255,0.5);
+  color:#FA6400;
   }
 .custom-popup .leaflet-popup-tip-container {
   width:25px;
   height:15px;
+
   }
 .custom-popup .leaflet-popup-tip {
   border-left:15px solid transparent;
   border-right:15px solid transparent;
-  border-top:15px solid #2c3e50;
+  border-top:15px solid #5B6769;
   }

@@ -14,7 +14,7 @@
         <form id="search-form" action="" method="">
           <div class="ui action fluid input">
             <input type="text" placeholder="Search...">
-            <button class="ui icon button primary">
+            <button class="ui inverted orange icon button">
               <i class="food icon"></i>
             </button>
           </div>
@@ -31,7 +31,7 @@
 
     <!-- Handlebar Templates -->
     <script id="search-results-template" type="text/x-handlebars-template">
-      <div class="ui inverted  fluid accordion">
+      <div class="ui inverted fluid accordion">
         {{#each restaurants}}
         <div class="ui divider"></div>
         <div class="restaurant"
@@ -46,7 +46,7 @@
               <span class="wait-time-indicator pull-right">
                 {{#if wait_time}}
                   {{wait_time.time}}
-                  <i class="wait icon"></i>
+                  <i class="orange wait icon"></i>
                 {{else}}
                   no estimate
                 {{/if}}
@@ -76,7 +76,7 @@
               </div>
               <div class="item">
                 {{#each categories}}
-                <div class="ui blue label">
+                <div class="category mini ui inverted orange button">
                   {{this}}
                 </div>
                 {{/each}}
@@ -84,7 +84,7 @@
               <form class="ui form wait-time-form" data-id="{{id}}" action="" method="">
                 <div class="ui action fluid input">
                   <input type="number " placeholder="Wait times">
-                  <button class="ui small button primary">
+                  <button class="tiny ui inverted orange button">
                     Minutes
                   </button>
                 </div>
