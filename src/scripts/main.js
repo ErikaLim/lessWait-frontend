@@ -21,7 +21,7 @@ $("#search-results").on("click", ".restaurant", function() {
     wait_time: waitTime
   };
 
-  addMarker(restaurant);
+   addMarker(restaurant);
 });
 
 $("#search-results").on("click", ".category", function () {
@@ -63,7 +63,9 @@ function searchAction(searchTerm) {
     .done(function (res) {
       // append to list
       setSearchResultsTemplate({restaurants:res});
-      console.log(res);
+      res.forEach(function(restaurant) {
+        addMarker(restaurant);
+      });
     })
     .fail(function () {
       throw "Search AJAX Failed";
@@ -85,7 +87,7 @@ function addMarker(restaurant) {
     type: 'Feature',
     geometry: {
         type: 'Point',
-        coordinates: restaurant.coords
+        coordinates: [restaurant.geocoords[0], restaurant.geocoords[1]]
     },
     properties: {
         title: restaurant.name,
@@ -95,7 +97,7 @@ function addMarker(restaurant) {
         'marker-symbol': 'restaurant'
     }
   });
-  console.log(">>", restaurant);
+
   featureLayer.addTo(map);
   featureLayers.push(featureLayer);
 }
@@ -132,4 +134,11 @@ function removeWaitTimeForm($form) {
 
 function setActiveRestaurant(waitTime) {
   $('.active.title .wait-time-indicator').html(waitTime + '<i class="wait icon"></i>');
+}
+
+// map.featureLayer.on('ready', function(e) {
+// });
+
+function clickButton() {
+  console.log('hi ericka');
 }
