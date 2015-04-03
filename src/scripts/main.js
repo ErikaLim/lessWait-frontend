@@ -4,7 +4,7 @@ var searchResultsTemplate = Handlebars.compile(source);
 var featureLayers = [];
 
 L.mapbox.accessToken = 'pk.eyJ1IjoiZXJpa2FsaW0iLCJhIjoiSlNWby0ySSJ9.EIx_Hy7Z4poH6igFQqfCZQ';
-map = L.mapbox.map('map', 'erikalim.ljld06gn').setView([37.759, -122.445], 13);
+map = L.mapbox.map('map', 'erikalim.ad6b27c9').setView([37.759, -122.445], 13);
 
 $("#search-results").on("click", ".restaurant", function() {
   var divCoords = $(this).data("coordinates").split(',');
@@ -94,7 +94,7 @@ function addMarker(restaurant) {
         title: restaurant.name,
         description: "<div>"+ restaurant.address +"</div>" + "<div>"+ restaurant.phone +"</div>" + "<div>" + "Last reported: " + waitTime + "</div>",
         'marker-size': 'medium',
-        'marker-color': '#FA6400',
+        'marker-color': '#777C7D',
         'marker-symbol': 'restaurant'
     }
   });
