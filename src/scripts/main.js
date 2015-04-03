@@ -83,6 +83,7 @@ function setSearchResultsTemplate(context) {
 }
 
 function addMarker(restaurant) {
+  var waitTime = restaurant.wait_time ? restaurant.wait_time.time : "No Report";
   var featureLayer = L.mapbox.featureLayer({
     type: 'Feature',
     geometry: {
@@ -91,7 +92,7 @@ function addMarker(restaurant) {
     },
     properties: {
         title: restaurant.name,
-        description: "<div>"+ restaurant.address +"</div>" + "<div>"+ restaurant.phone +"</div>" + "<div>" + "Last reported:" + restaurant.wait_time + "</div>",
+        description: "<div>"+ restaurant.address +"</div>" + "<div>"+ restaurant.phone +"</div>" + "<div>" + "Last reported: " + waitTime + "</div>",
         'marker-size': 'medium',
         'marker-color': '#FA6400',
         'marker-symbol': 'restaurant'
