@@ -49,7 +49,8 @@ $("#search-results").on("submit", "div.content.active form", function (e) {
 
 function searchAction(searchTerm) {
   var query = searchTerm.replace(/\s/g, "+");
-  var url = "http://localhost:3000/search_yelp";
+  // var url = "http://localhost:3000/search_yelp";
+  var url = "https://less-wait.herokuapp.com/search_yelp";
   var req = {
     url: url,
     method: "post",
@@ -88,7 +89,7 @@ function addMarker(restaurant) {
     },
     properties: {
         title: restaurant.name,
-        description: "<div>"+ restaurant.address +"</div>" + "<div>"+ restaurant.phone +"</div>" + "<div>" + restaurant.wait_time + " minutes </div>",
+        description: "<div>"+ restaurant.address +"</div>" + "<div>"+ restaurant.phone +"</div>" + "<div>" + "Last reported:" + restaurant.wait_time + "</div>",
         'marker-size': 'medium',
         'marker-color': '#FA6400',
         'marker-symbol': 'restaurant'
@@ -105,7 +106,9 @@ function reportWaitTimeAction(waitTime,id) {
     restaurant_id:id
   };
 
-  var url = "http://localhost:3000/wait_times";
+  // var url = "http://localhost:3000/wait_times";
+  var url = "https://less-wait.herokuapp.com/wait_times";
+
   var req = {
     url: url,
     method: "post",

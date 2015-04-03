@@ -51,3 +51,15 @@ body, html {
   border-right:15px solid transparent;
   border-top:15px solid #5B6769;
   }
+
+.wait-time-indicator {
+  color:#FA6400;
+}
+
+#star {
+  color:#FA6400;
+}
+
+/*h5 {
+  color:#8A8789;
+}*/
