@@ -4,7 +4,9 @@ var searchResultsTemplate = Handlebars.compile(source);
 var featureLayers = [];
 
 L.mapbox.accessToken = 'pk.eyJ1IjoiZXJpa2FsaW0iLCJhIjoiSlNWby0ySSJ9.EIx_Hy7Z4poH6igFQqfCZQ';
-map = L.mapbox.map('map', 'erikalim.ad6b27c9').setView([37.759, -122.445], 13);
+var map = L.mapbox.map('map', 'erikalim.ad6b27c9').setView([37.759, -122.445], 13);
+
+
 
 $("#search-results").on("click", ".restaurant", function() {
   var divCoords = $(this).data("coordinates").split(',');
@@ -21,7 +23,6 @@ $("#search-results").on("click", ".restaurant", function() {
     wait_time: waitTime
   };
 
-   addMarker(restaurant);
 });
 
 $("#search-results").on("click", ".category", function () {
@@ -101,7 +102,10 @@ function addMarker(restaurant) {
 
   featureLayer.addTo(map);
   featureLayers.push(featureLayer);
+
 }
+
+
 
 function reportWaitTimeAction(waitTime,id) {
   var payload = {
@@ -135,11 +139,4 @@ function removeWaitTimeForm($form) {
 
 function setActiveRestaurant(waitTime) {
   $('.active.title .wait-time-indicator').html(waitTime + '<i class="wait icon"></i>');
-}
-
-// map.featureLayer.on('ready', function(e) {
-// });
-
-function clickButton() {
-  console.log('hi ericka');
 }
