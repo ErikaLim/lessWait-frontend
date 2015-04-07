@@ -148,5 +148,7 @@ function hideInstructions() {
 }
 
 function showMap() {
+  $('#map').transition('fade down');
   $('#map').removeClass('hidden');
+
 }
