@@ -6,9 +6,9 @@ var featureLayers = [];
 L.mapbox.accessToken = 'pk.eyJ1IjoiZXJpa2FsaW0iLCJhIjoiSlNWby0ySSJ9.EIx_Hy7Z4poH6igFQqfCZQ';
 var map = L.mapbox.map('map', 'erikalim.ad6b27c9').setView([37.759, -122.445], 13);
 
-
-
 $("#search-results").on("click", ".restaurant", function() {
+
+
   var divCoords = $(this).data("coordinates").split(',');
   var name = $(this).data("name");
   var address = $(this).data("address");
@@ -34,6 +34,8 @@ $("#search-results").on("click", ".category", function () {
 
 $("#search-form").on("submit", function (e) {
   e.preventDefault();
+  hideInstructions();
+  showMap();
   searchAction($("#search-form input").val());
 });
 
@@ -139,4 +141,12 @@ function removeWaitTimeForm($form) {
 
 function setActiveRestaurant(waitTime) {
   $('.active.title .wait-time-indicator').html(waitTime + '<i class="wait icon"></i>');
+}
+
+function hideInstructions() {
+  $('.instructions').remove();
+}
+
+function showMap() {
+  $('#map').removeClass('hidden');
 }
