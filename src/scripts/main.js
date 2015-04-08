@@ -165,6 +165,7 @@ function removeWaitTimeForm($form) {
 
 function setActiveRestaurant(waitTime) {
   $('.active.title .wait-time-indicator').html(waitTime + '<i class="wait icon"></i>');
+  $('.active.title').parent().click();
 }
 
 function hideInstructions() {
