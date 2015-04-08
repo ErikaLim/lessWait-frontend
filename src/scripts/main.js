@@ -6,6 +6,7 @@ var featureLayers = [];
 L.mapbox.accessToken = 'pk.eyJ1IjoiZXJpa2FsaW0iLCJhIjoiSlNWby0ySSJ9.EIx_Hy7Z4poH6igFQqfCZQ';
 var map = L.mapbox.map('map', 'erikalim.ad6b27c9').setView([37.759, -122.445], 13);
 
+
 $("#search-results").on("click", ".restaurant", function() {
 
   var divCoords = $(this).data("coordinates").split(',');
@@ -21,10 +22,31 @@ $("#search-results").on("click", ".restaurant", function() {
     phone: phone,
     wait_time: waitTime
   };
-  map.featureLayer.eachLayer(function(marker) {
-    marker.openPopup();
-  });
+
+  openMarker(restaurant);
 });
+
+function openMarker(restaurant) {
+
+  var popupLayer = L.mapbox.featureLayer({
+    type: 'Feature',
+    geometry: {
+        type: 'Point',
+        coordinates: [restaurant.coords[0], restaurant.coords[1]]
+    },
+    properties: {
+        title: restaurant.name,
+        description: "<div>"+ restaurant.address +"</div>" + "<div>"+ restaurant.phone +
+        "</div>" + "<div>" + "Last reported: " + restaurant.wait_time + "</div>",
+        'marker-size': 'medium',
+        'marker-color': '#777C7D',
+        'marker-symbol': 'restaurant'
+    }
+  });
+
+  popupLayer.addTo(map);
+  popupLayer.openPopup();
+}
 
 $("#search-results").on("click", ".category", function () {
   var category = $(this).text().trim();
@@ -75,6 +97,7 @@ function searchAction(searchTerm) {
       throw "Search AJAX Failed";
     });
 }
+
 
 function setSearchResultsTemplate(context) {
   var html = searchResultsTemplate(context);
@@ -152,6 +175,6 @@ function showMap() {
   if ($('#map').hasClass("hidden")) {
     $('#map').transition('fade down');
   }
-  
+
   $('#map').removeClass('hidden');
 }
