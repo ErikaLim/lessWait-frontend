@@ -39,7 +39,7 @@ function openMarker(restaurant) {
         description: "<div>"+ restaurant.address +"</div>" + "<div>"+ restaurant.phone +
         "</div>" + "<div>" + "Last reported: " + restaurant.wait_time + "</div>",
         'marker-size': 'medium',
-        'marker-color': '#777C7D',
+        'marker-color': '#696969',
         'marker-symbol': 'restaurant'
     }
   });
@@ -121,7 +121,7 @@ function addMarker(restaurant) {
         title: restaurant.name,
         description: "<div>"+ restaurant.address +"</div>" + "<div>"+ restaurant.phone +"</div>" + "<div>" + "Last reported: " + waitTime + "</div>",
         'marker-size': 'medium',
-        'marker-color': '#777C7D',
+        'marker-color': '#696969',
         'marker-symbol': 'restaurant'
     }
   });
