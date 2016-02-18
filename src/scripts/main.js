@@ -75,8 +75,8 @@ $("#search-results").on("submit", "div.content.active form", function (e) {
 
 function searchAction(searchTerm) {
   var query = searchTerm.replace(/\s/g, "+");
-  var url = "http://localhost:3000/search_yelp";
-  // var url = "https://less-wait.herokuapp.com/search_yelp";
+  // var url = "http://localhost:3000/search_yelp";
+  var url = "https://less-wait.herokuapp.com/search_yelp";
   var req = {
     url: url,
     method: "post",
@@ -139,8 +139,8 @@ function reportWaitTimeAction(waitTime,id) {
     restaurant_id:id
   };
 
-  var url = "http://localhost:3000/wait_times";
-  // var url = "https://less-wait.herokuapp.com/wait_times";
+  // var url = "http://localhost:3000/wait_times";
+  var url = "https://less-wait.herokuapp.com/wait_times";
 
   var req = {
     url: url,
